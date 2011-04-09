@@ -16,13 +16,22 @@ cat << EOF
 EOF
 
 schedule=schedule.csv
-today=$(date +%x)
+today=$(date +%m/%d/%y) # mm/dd/yy is the format of schedule.csv
 #now=$(date "+%I:%M %p")
-game=$(grep -c "$today" $schedule)
-#begins=$(grep "$today" $schedule | cut -d, -f2)
-#ends=$(grep "$today" $schedule | cut -d, -f3)
 
-if [[ "$game" -eq '1' ]]; then
+IFS=,
+
+line=0
+while read field1 field2 field3; do
+  if [[ "$field1" =~ "$today" ]]; then
+    game=1
+    begins=$field2
+    ends=$field3
+    break
+  fi
+done < $schedule
+
+if [[ -n "$game" ]]; then
     echo -e "    <p style=\"font-size: 120pt; font-weight: bold; font-family: Helvetica, Arial, sans-serif; color: black;\">No.</p>"
 else
     echo -e "    <p style=\"font-size: 120pt; font-weight: bold; font-family: Helvetica, Arial, sans-serif; color: black;\">Yes.</p>"
