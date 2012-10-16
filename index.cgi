@@ -30,7 +30,7 @@ done < "$schedule"
 printf "<p class=\"small\">Should I ride Muni today?</p>"
 
 if [[ -n "$game" ]]; then # there's a game today
-    printf "<p class=\"big\">No.</p><p class=\"small\">The Giants are playing a home game that starts at $begins and ends at $ends</p>"
+    printf "<p class=\"big\">No.</p><p class=\"small\">The Giants are playing a home game that starts at $begins PT and ends at $ends PT</p>"
 else
     printf "<p class=\"big\">Yes.</p><p class=\"small\">The Giants aren't playing a home game</p>"
 fi
