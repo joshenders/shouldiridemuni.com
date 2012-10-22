@@ -4,7 +4,8 @@
 printf "Content-Type: text/html; charset=utf-8\n\n"
 
 # html head
-printf '<!doctype html><html><!-- http://github.com/joshenders/ --><head><meta charset="utf-8" /><title>Should I ride Muni today?</title><style type="text/css">p { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 45pt; color: #595959; } .small { font-size: 45pt; color: gray; }</style></head><body style="text-align: center">'
+printf '<!doctype html><html><!-- http://github.com/joshenders/ --><head><meta charset="utf-8" /><link rel="icon" type="image/png" href="data:image/png;base64,AAABAAEAEBACAAAAAACwAAAAFgAAACgAAAAQAAAAIAAAAAEAAQAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAMgrEAKPiAACn8gAAp/IAAK46AACsGgAAqcoAAKvqAACr6gAAq2oAAKtqAACragAAu24AAJNkAADGMQAA/j8AAHwfAABcHQAAWA0AAFgNAABRxQAAU+UAAFY1AABUFQAAVBUAAFSVAABUlQAAVJUAAESRAABsmwAAOc4AAAHAAACD4AAA" />
+<title>Should I ride Muni today?</title><style type="text/css">p { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 45pt; color: #595959; } .small { font-size: 45pt; color: gray; }</style></head><body style="text-align: center">'
 
 # A cron job grabs the schedule twice a day at noon and midnight
 # 00 00,12 * * * /usr/bin/curl -s "http://mlb.mlb.com/soa/ical/schedule.csv?home_team_id=137&season=$(date +%Y)" | /bin/egrep 'START|AT&T' | /usr/bin/cut -d, -f1,2,9 > schedule.csv
