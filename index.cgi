@@ -5,10 +5,10 @@ printf "Content-Type: text/html; charset=utf-8\n\n"
 
 # html head
 printf '<!doctype html><html><!-- http://github.com/joshenders/ --><head><meta charset="utf-8" /><link rel="icon" type="image/png" href="data:image/png;base64,AAABAAEAEBACAAAAAACwAAAAFgAAACgAAAAQAAAAIAAAAAEAAQAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAMgrEAKPiAACn8gAAp/IAAK46AACsGgAAqcoAAKvqAACr6gAAq2oAAKtqAACragAAu24AAJNkAADGMQAA/j8AAHwfAABcHQAAWA0AAFgNAABRxQAAU+UAAFY1AABUFQAAVBUAAFSVAABUlQAAVJUAAESRAABsmwAAOc4AAAHAAACD4AAA" />
-<title>Should I ride Muni today?</title><style type="text/css">p { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 45pt; color: #595959; } .small { font-size: 45pt; color: gray; }</style></head><body style="text-align: center">'
+<title>Should I ride Muni today?</title><style type="text/css">* { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 30pt; color: #595959; } h1 { font-size: 45pt; color: gray; } .small { font-size: 25pt; color: gray; }</style></head><body style="text-align: center">'
 
 # A cron job grabs the schedule twice a day at noon and midnight
-# 00 00,12 * * * /usr/bin/curl -s "http://mlb.mlb.com/soa/ical/schedule.csv?home_team_id=137&season=$(date +%Y)" | /bin/egrep 'START|AT&T' | /usr/bin/cut -d, -f1,2,9 > schedule.csv
+# 00 00,12 * * * /usr/bin/curl -s "http://mlb.mlb.com/soa/ical/schedule.csv?home_team_id=137&season=$(date +\%Y)" | /bin/egrep 'START|AT&T' | /usr/bin/cut -d, -f1,2,9 > schedule.csv
 
 schedule='schedule.csv'
 today="$(date +%m/%d/%y)" # mm/dd/yy is the format of schedule.csv
@@ -28,7 +28,7 @@ while read field1 field2 field3; do
 done < "$schedule"
 
 # html main
-printf "<p class=\"small\">Should I ride Muni today?</p>"
+printf "<h1>Should I ride Muni today?</h1>"
 
 if [[ -n "$game" ]]; then # there's a game today
     printf "<p class=\"big\">Nope.</p><p class=\"small\">A Giants home game starts at <span class=\"time\">$begins</span> and ends at <span class=\"time\">$ends</span>.</p>"
