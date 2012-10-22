@@ -4,7 +4,7 @@
 printf "Content-Type: text/html; charset=utf-8\n\n"
 
 # html head
-printf '<!doctype html><html><!-- http://josh.typepad.com --><head><meta charset="utf-8" /><title>Should I ride Muni today?</title><style type="text/css">p { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black;} .small { font-size: 25pt; color: gray; }</style></head><body style="text-align: center; padding-top: 100px;">'
+printf '<!doctype html><html><!-- http://github.com/joshenders/ --><head><meta charset="utf-8" /><title>Should I ride Muni today?</title><style type="text/css">p { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 25pt; color: #595959; } .small { font-size: 25pt; color: gray; } .query { font-size: 45pt; color: gray; }</style></head><body style="text-align: center">'
 
 # A cron job grabs the schedule twice a day at noon and midnight
 # 00 00,12 * * * /usr/bin/curl -s "http://mlb.mlb.com/soa/ical/schedule.csv?home_team_id=137&season=$(date +%Y)" | /bin/egrep 'START|AT&T' | /usr/bin/cut -d, -f1,2,9 > schedule.csv
@@ -27,12 +27,12 @@ while read field1 field2 field3; do
 done < "$schedule"
 
 # html main
-printf "<p class=\"small\">Should I ride Muni today?</p>"
+printf "<p class=\"query\">Should I ride Muni today?</p>"
 
 if [[ -n "$game" ]]; then # there's a game today
-    printf "<p class=\"big\">No.</p><p class=\"small\">The Giants are playing a home game that starts at $begins and ends at $ends.</p>"
+    printf "<p class=\"big\">Nope.</p><p class=\"small\">The Giants are playing a home game that starts at <span class=\"time\">$begins</span> and ends at <span class=\"time\">$ends</span>.</p>"
 else
-    printf "<p class=\"big\">Yes.</p><p class=\"small\">The Giants aren't playing a home game</p>"
+    printf "<p class=\"big\">Sure.</p><p class=\"small\">No Giants game today.</p>"
 fi
 
 # html tail
