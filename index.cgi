@@ -19,7 +19,7 @@ IFS=,
 
 # loop through schedule
 while read field1 field2 field3; do
-  if [[ "$field1" =~ "$today" ]]; then
+  if [[ "$field1" == "$today" ]]; then
     game='1'
     begins="$field2"
     ends="$field3"
