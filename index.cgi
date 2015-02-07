@@ -19,19 +19,19 @@ IFS=,
 
 # loop through schedule
 while read field1 field2 field3; do
-  if [[ "$field1" == "$today" ]]; then
+  if [[ "${field1}" == "${today}" ]]; then
     game='1'
-    begins="$field2"
-    ends="$field3"
+    begins="${field2}"
+    ends="${field3}"
     break
   fi
-done < "$schedule"
+done < "${schedule}"
 
 # html main
 printf "<h1>Should I ride Muni today?</h1>"
 
-if [[ -n "$game" ]]; then # there's a game today
-    printf "<p class=\"big\">Nope.</p><p class=\"small\">A Giants home game starts at <span class=\"time\">$begins</span> and ends at <span class=\"time\">$ends</span>.</p>"
+if [[ -n "${game}" ]]; then # there's a game today
+    printf "<p class=\"big\">Nope.</p><p class=\"small\">A Giants home game starts at <span class=\"time\">${begins}</span> and ends at <span class=\"time\">${ends}</span>.</p>"
 else
     printf "<p class=\"big\">Sure.</p><p class=\"small\">No Giants game today.</p>"
 fi
