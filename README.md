@@ -8,9 +8,9 @@ I built this site to be used while making split second transit decisions,
 often faced with the question: "Should I take the bus or walk to the MUNI
 platform for a more direct route home?".
 
-Giants Fans (aka out-of-towners) generally don't understand the bus system in
+Giants fans (aka out-of-towners) generally don't understand the bus system in
 San Francisco and so what can typically be a more circuitous option ends up
-being a lot faster on days there is a home game.
+being a lot faster on days there is a Giants game.
 
 I can't overstate how bad the consequences are if you make the wrong choice...
 
