@@ -37,7 +37,7 @@ printf "<h1>Should I ride Muni today?</h1>"
 if [[ -n "${game}" ]]; then # there's a game today
     printf "<p class=\"big\">Nope.</p><p class=\"small\">There's a Giants home game today at Oracle Park.</p><p class=\"small\">It starts at <span class=\"time\">${begins}</span> and ends at <span class=\"time\">${ends}</span>.</p>"
 else
-    printf "<p class=\"big\">Sure.</p><p class=\"small\">No Giants game today.</p>"
+    printf "<p class=\"big\">Sure.</p><p class=\"small\">No game today.</p>"
 fi
 
 # html tail
