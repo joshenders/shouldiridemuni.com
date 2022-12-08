@@ -7,8 +7,8 @@ printf "Content-Type: text/html; charset=utf-8\n\n"
 printf '<!doctype html><html><!-- https://github.com/joshenders/ --><head><meta charset="utf-8" /><link rel="icon" type="image/png" href="data:image/png;base64,AAABAAEAEBACAAAAAACwAAAAFgAAACgAAAAQAAAAIAAAAAEAAQAAAAAAQAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAQACwAKPFAACn5QAAp+UAAK51AACsNQAAqZUAAKvVAACr1QAAq9UAAKvVAACr1QAAu90AAJPJAADGYwAA/n8AAHw+AABcOgAAWBoAAFgaAABRigAAU8oAAFZqAABUKgAAVCoAAFQqAABUKgAAVCoAAEQiAABsNgAAOZwAAAGAAACDwQAA" /><title>Should I ride Muni today?</title><style type="text/css">* { font-family: Helvetica, Arial, sans-serif; font-weight: bold; } .big { font-size: 120pt; color: black; margin: 0px; } .time { font-size: 30pt; color: #595959; } h1 { font-size: 45pt; color: gray; } .small { font-size: 25pt; color: gray; }</style></head><body style="text-align: center">'
 
 # A cron job downloads the schedule at noon and midnight
-# 00 00,12 * * * /usr/bin/curl -s "http://mlb.mlb.com/ticketing-client/csv/EventTicketPromotionPrice.tiksrv?team_id=137&home_team_id=137&display_in=singlegame&ticket_category=Tickets&site_section=Default&sub_category=Default&leave_empty_games=true&event_type=T&event_type=Y" | /usr/bin/cut -d, -f1,2,9 > schedule.csv
-#
+# 00 00,6 * * * /usr/local/sbin/get-mlb-schedule.sh
+
 # Sample lines:
 # START DATE,START TIME,START TIME ET,SUBJECT,LOCATION,DESCRIPTION,END DATE,END DATE ET,END TIME,END TIME ET,REMINDER OFF,REMINDER ON,REMINDER DATE,REMINDER TIME,REMINDER TIME ET,SHOWTIMEAS FREE,SHOWTIMEAS BUSY
 # 04/07/16,01:35 PM,04:35 PM,Dodgers at Giants,AT&T Park - San Francisco,"Local TV: CSN-BA ----- Local Radio: KNBR 680- KTRB 860",04/07/16,04/07/16,04:35 PM,07:35 PM,FALSE,TRUE,04/07/16,12:35 PM,03:35 PM,FREE,BUSY
