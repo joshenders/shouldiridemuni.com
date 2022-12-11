@@ -8,11 +8,12 @@ I built this site to make better split-second transit decisions during baseball
 season in San Francisco's SoMa neighborhood. After work, you're often faced with
 the question: "Should I take the bus home or should I take the Muni train home?".
 
-I can't overstate how bad the consequences are if you make the wrong choice...
+I can't overstate how bad the consequences are if you make the wrong decision...
 
 In general, out-of-towners (Giants fans) don't really understand the Muni bus
-system and use it far less than the Muni train. The bus system is typically the
-slower option but on game days, it's A LOT faster and has seating room.
+system and use it far less than the Muni trains. The bus system is typically the
+slower option but on game days, it's A LOT faster, has seating room, andddd
+fewer Giants fans.
 
 ## Performance
 
