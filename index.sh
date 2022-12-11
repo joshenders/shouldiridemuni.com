@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # http header
 printf "Content-Type: text/html; charset=utf-8\n\n"
