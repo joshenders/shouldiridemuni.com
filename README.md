@@ -4,13 +4,14 @@
 
 ## About
 
-I built this site to be used while making split second transit decisions,
-often faced with the question: "Should I take the bus or walk to the MUNI
-platform for a more direct route home?".
+I built this site to be used while making split second transit decisions
+during baseball season in San Francisco's SoMa district. After work you're
+often faced with the question: "Should I take the bus or should I take the
+Muni train home?"
 
-Giants fans (aka out-of-towners) generally don't understand the bus system in
-San Francisco and so what can typically be a more circuitous option ends up
-being a lot faster on days there is a Giants game.
+In general, out-of-towners (Giants fans) don't understand the bus system and
+use it far less than the train. The bus system is typically the slower option
+but on game days, it's a lot faster and has seating room.
 
 I can't overstate how bad the consequences are if you make the wrong choice...
 
@@ -27,8 +28,30 @@ rewritten on Cloudflare's Workers platform.
 
 ## Installation
 
-Runs via [https://acme.com/software/thttpd/](`thttpd`)
+Runs via [https://acme.com/software/thttpd/](`thttpd`):
 
+* `/etc/thttpd/thttpd.conf`
+```
+# BEWARE : No empty lines are allowed!
+# This section overrides defaults
+# This section _documents_ defaults in effect
+# port=80
+# nosymlink         # default = !chroot
+# novhost
+# nocgipat
+# nothrottles
+# host=0.0.0.0
+# charset=iso-8859-1
+host=127.0.0.1
+port=10000
+user=www-data
+logfile=/var/log/thttpd.log
+pidfile=/var/run/thttpd.pid
+dir=/usr/share/nginx/shouldiridemuni.com
+cgipat=**.sh|**.cgi
+```
+
+* `/etc/nginx/sites-available/shouldiridemuni.conf` nginx configuration:
 ```
 upstream thttpd {
     server 127.0.0.1:10000;
@@ -52,7 +75,11 @@ server {
 }
 ```
 
-`get-mlb-schedule.sh` goes in `/usr/local/sbin` executed via root's crontab.
+`get-mlb-schedule.sh` goes in `/usr/local/sbin` executed via the following crontab in `/etc/cron.d` as `www-data`: 
+
+```
+00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
+```
 
 ## License
 
