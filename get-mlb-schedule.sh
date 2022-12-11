@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 year="$(date +%Y)"
 outfile='/usr/share/nginx/shouldiridemuni.com/schedule.csv'
