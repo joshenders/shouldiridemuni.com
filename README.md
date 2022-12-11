@@ -4,33 +4,32 @@
 
 ## About
 
-I built this site to be used while making split second transit decisions
-during baseball season in San Francisco's SoMa district. After work you're
-often faced with the question: "Should I take the bus or should I take the
-Muni train home?"
-
-In general, out-of-towners (Giants fans) don't understand the bus system and
-use it far less than the train. The bus system is typically the slower option
-but on game days, it's a lot faster and has seating room.
+I built this site to make better split-second transit decisions during baseball
+season in San Francisco's SoMa neighborhood. After work, you're often faced with
+the question: "Should I take the bus home or should I take the Muni train home?".
 
 I can't overstate how bad the consequences are if you make the wrong choice...
+
+In general, out-of-towners (Giants fans) don't really understand the Muni bus
+system and use it far less than the Muni train. The bus system is typically the
+slower option but on game days, it's A LOT faster and has seating room.
 
 ## Performance
 
 The page is optimized for extremely low cellular bandwidth. The whole page
-fits in a very conservative TCP MSS of 1380 bytes. Sadly, I can't count on
-0-RTT TLS, so no https (sorry).
+fits in a very conservative TCP MSS of 1380 bytes and is extremly cacheable.
+Sadly, I can't count on 0-RTT TLS, so no https (sorry).
 
 ## Improvements
 
-It's currently written in Bash and runs as a CGI script. It should probably be
-rewritten on Cloudflare's Workers platform.
+It's currently written in Bash and runs as a plain old CGI script. It should
+probably be rewritten on Cloudflare's Workers platform.
 
 ## Installation
 
-Runs via [https://acme.com/software/thttpd/](`thttpd`):
+Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`
 
-* `/etc/thttpd/thttpd.conf`
+> `/etc/thttpd/thttpd.conf`
 ```
 # BEWARE : No empty lines are allowed!
 # This section overrides defaults
@@ -51,7 +50,7 @@ dir=/usr/share/nginx/shouldiridemuni.com
 cgipat=**.sh|**.cgi
 ```
 
-* `/etc/nginx/sites-available/shouldiridemuni.conf` nginx configuration:
+> `/etc/nginx/sites-available/shouldiridemuni.conf`
 ```
 upstream thttpd {
     server 127.0.0.1:10000;
