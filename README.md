@@ -4,22 +4,25 @@
 
 ## About
 
-I built this site to make better split-second transit decisions during baseball
-season in San Francisco's SoMa neighborhood. After work, you're often faced
-with the question: "Should I take the bus home or should I take the Muni train
-home?".
+I built this site to help make transit decisions easier during baseball season.
 
-I can't overstate the consequences of making the wrong decision...
+After leaving work in San Francisco's SoMa neighborhood, you're often faced with the question: 
 
-The bus system is typically the slower option but on game days, it's a lot faster.
-In general, out-of-towners (aka Giants fans) don't really understand the Muni bus
-system and use it far less than the Muni trains.
+"Should I take the bus or should I take the train?".
+
+The consequences of making the wrong decision on a game day cannot be overstated...
+
+The bus system is usually the slower option but on game days, it's a TON faster since
+out-of-towners (aka Giants fans) simply cannot comprehend the complexity of the Muni
+bus system.
+
+Judgemental? Yes. Apologetic? Not at all.
 
 ## Performance
 
 The page is optimized for extremely low cellular bandwidth. The whole page
 fits in a very conservative TCP MSS of 1380 bytes and is extremly cacheable.
-Sadly, I can't count on 0-RTT TLS to speed things up, so no https (sorry).
+Sadly, I can't rely on 0-RTT TLS to speed things up, so no https (sorry).
 
 ## Improvements
 
