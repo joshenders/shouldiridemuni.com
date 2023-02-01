@@ -20,7 +20,7 @@ Judgemental? Yes. Apologetic? Not at all.
 
 ## Performance
 
-The page is optimized for extremely low cellular bandwidth. The whole page
+The page is optimized for extremely low bandwidth and high latency cellular connections. The whole page
 fits in a very conservative TCP MSS of 1380 bytes and is extremly cacheable.
 Sadly, I can't rely on 0-RTT TLS to speed things up, so no https (sorry).
 
