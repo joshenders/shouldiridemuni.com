@@ -11,16 +11,15 @@ home?".
 
 I can't overstate the consequences of making the wrong decision...
 
-In general, out-of-towners (Giants fans) don't really understand the Muni bus
-system and use it far less than the Muni trains. The bus system is typically
-the slower option but on game days, it's A LOT faster, has seating room, andddd
-fewer Giants fans.
+The bus system is typically the slower option but on game days, it's a lot faster.
+In general, out-of-towners (aka Giants fans) don't really understand the Muni bus
+system and use it far less than the Muni trains.
 
 ## Performance
 
 The page is optimized for extremely low cellular bandwidth. The whole page
 fits in a very conservative TCP MSS of 1380 bytes and is extremly cacheable.
-Sadly, I can't count on 0-RTT TLS, so no https (sorry).
+Sadly, I can't count on 0-RTT TLS to speed things up, so no https (sorry).
 
 ## Improvements
 
