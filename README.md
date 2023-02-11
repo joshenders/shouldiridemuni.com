@@ -12,21 +12,23 @@ After leaving work in San Francisco's SoMa neighborhood, you're often faced with
 
 The consequences of making the wrong decision on a game day cannot be overstated...
 
-The bus system is usually the slower option but on game days, it's a TON faster since
+The bus system is usually the slower option but on "Game Days™", it's a TON faster since
 out-of-towners (aka Giants fans) simply cannot comprehend the complexity of the Muni
 bus system.
 
 Judgemental? Yes. Apologetic? Not at all.
 
+![A point of view shot of a mob of Giants baseball fans rushing into a open traincar door](docs/giants_fans.jpg)
+
 ## Performance
 
 The page is optimized for extremely low bandwidth and high latency cellular connections. The whole page
-fits in a very conservative TCP MSS of 1380 bytes and is extremly cacheable.
+fits in a very conservative TCP MSS of 1380 bytes and is obvously extremly cacheable.
 Sadly, I can't rely on 0-RTT TLS to speed things up, so no https (sorry).
 
 ## Improvements
 
-It's currently written in Bash and runs as a plain old CGI script. It should
+It's currently written in Bash (lol) and runs as a plain old CGI script. It should
 probably be rewritten on Cloudflare's Workers platform.
 
 ## Installation
@@ -88,4 +90,4 @@ crontab in `/etc/cron.d` as `www-data`:
 ## License
 
 This work is licensed under CC BY-NC version 4.0 [https://creativecommons.org/licenses/by-nc/4.0/](https://creativecommons.org/licenses/by-nc/4.0/)
-© 2022, Josh Enders. Some Rights Reserved.
+© 2023, Josh Enders. Some Rights Reserved.
