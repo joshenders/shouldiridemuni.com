@@ -4,7 +4,7 @@
 
 ## About
 
-I built this site to help make transit decisions easier during baseball season.
+I built this site to help make my commute easier during baseball season.
 
 After leaving work in San Francisco's SoMa neighborhood, you're often faced with the question: 
 
