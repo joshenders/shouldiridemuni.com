@@ -6,34 +6,38 @@
 
 I built this site to help make my commute easier during baseball season.
 
-After leaving work in San Francisco's SoMa neighborhood, you're often faced with the question: 
+After leaving work in San Francisco's SoMa neighborhood, you're often faced with the question:
 
-"Should I take the bus or should I take the train?".
+> Should I take the bus home or should I take the train?
 
 The consequences of making the wrong decision on a game day cannot be overstated...
 
-The bus system is usually the slower option but on "Game Days™", it's a TON faster since
-out-of-towners (aka Giants fans) simply cannot comprehend the complexity of the Muni
-bus system.
+The bus system is generally the slower option but on "Game Days", it's a TON faster since
+out-of-towners (aka Giants fans) simply cannot comprehend the complexity of the bus system.
 
-Judgemental? Yes. Apologetic? Not at all.
+Judgemental? Yes. Apologetic? No. Not at all.
 
 ![A point of view shot of a mob of Giants baseball fans rushing into a open traincar door](docs/giants_fans.jpg)
 
 ## Performance
 
 The page is optimized for extremely low bandwidth and high latency cellular connections. The whole page
-fits in a very conservative TCP MSS of 1380 bytes and is cacheable. Sadly, it's not a use case where you
-can ever rely on 0-RTT to speed up TLS, so no https (sorry).
+fits in a very conservative TCP MSS of 1380 bytes and is cacheable.
+
+~~Sadly, it's not a use case where you can ever rely on 0-RTT to speed up TLS, so no https (sorry).~~
+
+The world has moved on since I first created this site in 2013 and HTTPS has eaten the world (this is partially my fault but I'm not sorry!). It is now served over HTTPS and ironically, slower and less reliable under high latency conditions. Hopefully, cellular coverage and bandwidth has improved somewhat as well? Mea culpa but we cannot stop the arrow of time now can we?
 
 ## Improvements
 
 It's currently written in Bash (lol) and runs as a plain old CGI script. It should
-probably be rewritten on Cloudflare's Workers platform.
+probably be rewritten on the Cloudflare's Workers platform.
 
 ## Installation
 
-Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`
+Files installed and updated in `/usr/share/nginx` via `git`.
+
+Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`:
 
 > `/etc/thttpd/thttpd.conf`
 ```
@@ -81,7 +85,7 @@ server {
 ```
 
 `get-mlb-schedule.sh` goes in `/usr/local/sbin` executed via the following
-crontab in `/etc/cron.d` as `www-data`: 
+crontab in `/etc/cron.d` as `www-data`:
 
 ```
 00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
