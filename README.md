@@ -26,7 +26,7 @@ fits in a very conservative TCP MSS of 1380 bytes and is cacheable.
 
 ~~Sadly, it's not a use case where you can ever rely on 0-RTT to speed up TLS, so no https (sorry).~~
 
-The world has moved on since I first created this site in 2013 and HTTPS has eaten the world (this is partially my fault but I'm not sorry!). It is now served over HTTPS and ironically, slower and less reliable under high latency conditions. Hopefully, cellular coverage and bandwidth has improved somewhat as well? Mea culpa but we cannot stop the arrow of time now can we?
+The world has moved on since I first created this site in 2013 and HTTPS has eaten the world (this is partially my fault but I'm not sorry!). It is now served over HTTPS and ironically, slower and less reliable under high latency conditions. Hopefully, cellular coverage and bandwidth have improved somewhat as well? Mea culpa but we cannot stop the arrow of time now can we?
 
 ## Improvements
 
