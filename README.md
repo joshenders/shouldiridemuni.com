@@ -35,7 +35,17 @@ probably be rewritten on the Cloudflare's Workers platform.
 
 ## Installation
 
-Files installed and updated in `/usr/share/nginx` via `git`.
+Files installed and updated in `/usr/share/nginx/shouldiridemuni` via `git`:
+
+Install:
+```sh
+git clone https://github.com/joshenders/shouldiridemuni.com
+```
+
+Update:
+```sh
+git pull
+```
 
 Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`:
 
@@ -60,7 +70,10 @@ dir=/usr/share/nginx/shouldiridemuni.com
 cgipat=**.sh|**.cgi
 ```
 
+Fronted by nginx:
+
 > `/etc/nginx/sites-available/shouldiridemuni.conf`
+
 ```
 upstream thttpd {
     server 127.0.0.1:10000;
@@ -84,11 +97,18 @@ server {
 }
 ```
 
-`get-mlb-schedule.sh` goes in `/usr/local/sbin` executed via the following
-crontab in `/etc/cron.d` as `www-data`:
+`get-mlb-schedule.sh` should be copied to `/usr/local/sbin` executed via the following
+crontab created in `/etc/cron.d` as `www-data`:
 
 ```
 00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
+```
+
+If you don't want to wait 12 hours, you can seed the initial generation of
+`schedule.csv` with:
+
+```sh
+sudo -u www-data  /usr/local/sbin/get-mlb-schedule.sh
 ```
 
 ## License
