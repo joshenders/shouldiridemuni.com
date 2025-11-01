@@ -30,8 +30,7 @@ The world has moved on since I first created this site in 2013 and HTTPS has eat
 
 ## Improvements
 
-It's currently written in Bash (lol) and runs as a plain old CGI script. It should
-probably be rewritten on the Cloudflare's Workers platform.
+It's currently written in Bash (lol) and runs as a plain old CGI script. It should probably be rewritten on the Cloudflare's Workers platform.
 
 ## Installation
 
@@ -65,7 +64,8 @@ sudo git -C /usr/share/nginx/shouldiridemuni.com pull
 
 3. Reload systemd and enable and start the service.
 
-    > [!NOTE] [`thttpd`](https://acme.com/software/thttpd/) runs as root and then setuid/setgid/setgroup to `www-data`
+    > [!NOTE]
+    > [`thttpd`](https://acme.com/software/thttpd/) runs as root and then setuid/setgid/setgroup to `www-data`
 
     ```sh
     sudo systemctl daemon-reload
