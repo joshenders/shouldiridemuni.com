@@ -64,8 +64,7 @@ sudo git -C /usr/share/nginx/shouldiridemuni.com pull
 
 3. Reload systemd and enable and start the service.
 
-    > [!NOTE]
-    > [`thttpd`](https://acme.com/software/thttpd/) runs as root and then setuid/setgid/setgroup to `www-data`
+    [`thttpd`](https://acme.com/software/thttpd/) runs as root and then performs a `setuid`/`setgid`/`setgroup` to `www-data`
 
     ```sh
     sudo systemctl daemon-reload
