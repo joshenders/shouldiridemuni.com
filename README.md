@@ -38,11 +38,13 @@ probably be rewritten on the Cloudflare's Workers platform.
 Files installed and updated in `/usr/share/nginx/shouldiridemuni` via `git`:
 
 Install:
+
 ```sh
 git clone https://github.com/joshenders/shouldiridemuni.com
 ```
 
 Update:
+
 ```sh
 git pull
 ```
@@ -50,7 +52,8 @@ git pull
 Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`:
 
 > `/etc/thttpd/thttpd.conf`
-```
+
+```conf
 # BEWARE : No empty lines are allowed!
 # This section overrides defaults
 # This section _documents_ defaults in effect
@@ -74,7 +77,7 @@ Fronted by nginx:
 
 > `/etc/nginx/sites-available/shouldiridemuni.conf`
 
-```
+```conf
 upstream thttpd {
     server 127.0.0.1:10000;
     keepalive 16;
@@ -100,7 +103,7 @@ server {
 `get-mlb-schedule.sh` should be copied to `/usr/local/sbin` executed via the following
 crontab created in `/etc/cron.d` as `www-data`:
 
-```
+```cron
 00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
 ```
 
