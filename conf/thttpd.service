@@ -1,0 +1,33 @@
+# /etc/systemd/system/thttpd.service
+[Unit]
+Description=thttpd tiny web server
+Documentation=man:thttpd(8)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/etc/thttpd/thttpd.conf
+
+[Service]
+Type=simple
+# Starts as root; thttpd drops to user=www-data per thttpd.conf.
+ExecStart=/usr/local/sbin/thttpd -C /etc/thttpd/thttpd.conf -D
+
+# Allow `systemctl reload thttpd` to SIGHUP the daemon
+ExecReload=/bin/kill -HUP $MAINPID
+
+Restart=on-failure
+RestartSec=2
+
+# Safe hardening that won't block setuid/setgid/setgroups during drop
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ProtectControlGroups=true
+ProtectKernelLogs=true
+LockPersonality=true
+RestrictRealtime=true
+RestrictNamespaces=true
+NoNewPrivileges=true
+SystemCallFilter=@system-service
+
+[Install]
+WantedBy=multi-user.target

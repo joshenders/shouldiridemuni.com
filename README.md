@@ -35,84 +35,81 @@ probably be rewritten on the Cloudflare's Workers platform.
 
 ## Installation
 
-Files installed and updated in `/usr/share/nginx/shouldiridemuni` via `git`:
-
-Install:
+Clone files to `/usr/share/nginx/shouldiridemuni`
 
 ```sh
-git clone https://github.com/joshenders/shouldiridemuni.com
+sudo -u www-data git clone https://github.com/joshenders/shouldiridemuni.com /usr/share/nginx/shouldiridemuni
 ```
 
-Update:
+Updates can be done with a simple `git pull`:
 
 ```sh
-git pull
+sudo git -C /usr/share/nginx/shouldiridemuni.com pull
 ```
 
-Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`:
+### `thttpd` Configuration
 
-> `/etc/thttpd/thttpd.conf`
+[`thttpd`](https://acme.com/software/thttpd/) is a simple CGI "app server" which will run `index.cgi` for each request.
 
-```conf
-# BEWARE : No empty lines are allowed!
-# This section overrides defaults
-# This section _documents_ defaults in effect
-# port=80
-# nosymlink         # default = !chroot
-# novhost
-# nocgipat
-# nothrottles
-# host=0.0.0.0
-# charset=iso-8859-1
-host=127.0.0.1
-port=10000
-user=www-data
-#logfile=/var/log/thttpd.log # logs to the systemd journal
-pidfile=/var/run/thttpd.pid
-dir=/usr/share/nginx/shouldiridemuni.com
-cgipat=**.sh|**.cgi
-```
+1. Symlink [`thttpd.conf`](conf/thttpd.conf) to `/etc/thttpd/thttpd.conf`.
 
-Fronted by nginx:
+    ```sh
+    ln -s /usr/share/nginx/shouldiridemuni.com/conf/thttpd.conf /etc/thttpd/thttpd.conf
+    ```
 
-> `/etc/nginx/sites-available/shouldiridemuni.conf`
+2. Symlink [`thttpd.service`](conf/thttpd.service) to `/etc/systemd/system/thttpd.service`.
 
-```conf
-upstream thttpd {
-    server 127.0.0.1:10000;
-    keepalive 16;
-}
+    ```sh
+    ln -s /usr/share/nginx/shouldiridemuni.com/conf/thttpd.service /etc/systemd/system/thttpd.service
+    ```
 
-server {
-    server_name shouldiridemuni.com;
-    try_files $uri @app;
-    location @app {
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header Host $http_host;
+3. Reload systemd and enable and start the service.
 
-        # Enable backend keepalives
-        proxy_http_version 1.1;
-        proxy_set_header Connection "";
+    > [!NOTE] [`thttpd`](https://acme.com/software/thttpd/) runs as root and then setuid/setgid/setgroup to `www-data`
 
-        proxy_redirect off;
-        proxy_pass http://thttpd;
-    }
-}
-```
+    ```sh
+    sudo systemctl daemon-reload
+    sudo systemctl enable thttpd.service
+    sudo systemctl start thttpd.service
+    ```
 
-`get-mlb-schedule.sh` should be copied to `/usr/local/sbin` executed via the following
-crontab created in `/etc/cron.d` as `www-data`:
-
-```cron
-00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
-```
-
-If you don't want to wait 12 hours, you can seed the initial generation of
-`schedule.csv` with:
+Logs can be viewed with:
 
 ```sh
-sudo -u www-data  /usr/local/sbin/get-mlb-schedule.sh
+sudo journalctl -u thttpd -f
 ```
+
+### `nginx` Configuration
+
+Requests are handled by [`nginx`](https://nginx.org) which proxies to `thttpd`.
+
+1. Symlink nginx config fragment [`shouldiridemuni.com](conf/shouldiridemuni.com.conf)` to `/etc/nginx/sites-available/shouldiridemuni.com`
+
+    ```sh
+    ln -s /usr/share/nginx/shouldiridemuni.com/conf/shouldiridemuni.com.conf /etc/nginx/sites-available/shouldiridemuni.com
+    ```
+
+### MLB cronjob Installation
+
+A cronjob runs a shell script twice a day as `www-data` which populates the games "database" –– a simple `.csv` file in `/usr/share/nginx/shouldiridemuni.com`.
+
+1. Symlink [`get-mlb-schedule.sh`](conf/get-mlb-schedule.sh) to `/usr/local/sbin`.
+
+    ```sh
+    ln -s /usr/share/nginx/shouldiridemuni.com/conf/get-mlb-schedule.sh /usr/local/sbin/get-mlb-schedule.sh
+    ```
+
+2. Install crontab in `/etc/cron.d`.
+
+    ```sh
+    ln -s usr/share/nginx/shouldiridemuni.com/conf/get-mlb-schedule.cron /etc/cron.d/get-mlb-schedule.cron
+    ```
+
+3. (Optional) If you don't want to wait 12 hours, you can seed the initial generation of `schedule.csv` with:
+
+    ```sh
+    sudo -u www-data  /usr/local/sbin/get-mlb-schedule.sh
+    ```
 
 ## License
 

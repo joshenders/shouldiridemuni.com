@@ -1,0 +1,2 @@
+# m h  dom mon dow user command
+00 00,12 * * * www-data /usr/local/sbin/get-mlb-schedule.sh
