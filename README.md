@@ -67,7 +67,7 @@ Executed via [`thttpd`](https://acme.com/software/thttpd/) as `www-data`:
 host=127.0.0.1
 port=10000
 user=www-data
-logfile=/var/log/thttpd.log
+#logfile=/var/log/thttpd.log # logs to the systemd journal
 pidfile=/var/run/thttpd.pid
 dir=/usr/share/nginx/shouldiridemuni.com
 cgipat=**.sh|**.cgi
